@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function TextForm(props) {
   const [text, setText] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
+  const [sortOrder] = useState("");
 
   const handleUpClick = () => {
     let newText = text.toUpperCase();
@@ -36,20 +36,6 @@ export default function TextForm(props) {
 
   const getNumbers = (text) => {
     return text.replace(/[^0-9]/g, '').split('').join(', ');
-  };
-
-  const handleAscendingSort = () => {
-    const sortedItems = text.split(/\s+/).filter(word => word).sort((a, b) => a.localeCompare(b)).join(' ');
-    setText(sortedItems);
-    setSortOrder('ascending');
-    props.showAlert("Ascending Sorting Completed!","success");
-  };
-
-  const handleDescendingSort = () => {
-    const sortedItems = text.split(/\s+/).filter(word => word).sort((a, b) => b.localeCompare(a)).join(' ');
-    setText(sortedItems);
-    setSortOrder('descending');
-    props.showAlert("Descending Sorting Completed!","success");
   };
 
   const handleCopy = () => {
@@ -97,12 +83,7 @@ export default function TextForm(props) {
         <button className="btn btn-primary mx-1" onClick={handleClearClick}>
           Clear Text
         </button>
-        <button className="btn btn-primary mx-1" onClick={handleAscendingSort} disabled={text.length === 0}>
-          Sort Ascending
-        </button>
-        <button className="btn btn-primary mx-1" onClick={handleDescendingSort} disabled={text.length === 0}>
-          Sort Descending
-        </button>
+
         <button className="btn btn-primary mx-1" onClick={handleCopy} >
           Copy Text
         </button>
